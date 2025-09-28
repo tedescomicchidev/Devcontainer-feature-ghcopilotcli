@@ -1,0 +1,29 @@
+#!/bin/bash
+set -euo pipefail
+
+_TEST_RESULTS=()
+_TEST_FAIL=0
+
+check() {
+    local name="$1"
+    shift
+    if "$@" >/tmp/devcontainer-test-stdout 2>/tmp/devcontainer-test-stderr; then
+        echo "✔︎ ${name}"
+        _TEST_RESULTS+=("PASS:${name}")
+    else
+        echo "✘ ${name}" >&2
+        echo "STDOUT:" >&2
+        cat /tmp/devcontainer-test-stdout >&2 || true
+        echo "STDERR:" >&2
+        cat /tmp/devcontainer-test-stderr >&2 || true
+        _TEST_RESULTS+=("FAIL:${name}")
+        _TEST_FAIL=1
+    fi
+}
+
+reportResults() {
+    if [ "${_TEST_FAIL}" -ne 0 ]; then
+        echo "Test suite failed" >&2
+        exit 1
+    fi
+}
