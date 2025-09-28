@@ -1,0 +1,35 @@
+{
+  "id": "copilot-cli",
+  "name": "copilot-cli",
+  "version": "0.1.0",
+  "description": "Installs and configures GitHub Copilot CLI",
+  "documentationURL": "https://github.com/github/copilot-cli",
+  "options": {
+    "version": {
+      "type": "string",
+      "default": "latest",
+      "description": "Version of @github/copilot npm package to install. Use \"latest\" for the newest release."
+    },
+    "installCompletions": {
+      "type": "boolean",
+      "default": true,
+      "description": "Attempt to install shell completions if supported by Copilot CLI."
+    },
+    "withGH": {
+      "type": "boolean",
+      "default": true,
+      "description": "Ensure GitHub CLI (gh) is installed to streamline authentication workflows."
+    },
+    "autoUpdate": {
+      "type": "boolean",
+      "default": false,
+      "description": "Update Copilot CLI to the latest version on rebuild when version=latest."
+    }
+  },
+  "installsAfter": [
+    "ghcr.io/devcontainers/features/common-utils",
+    "ghcr.io/devcontainers/features/git",
+    "ghcr.io/devcontainers/features/github-cli",
+    "ghcr.io/devcontainers/features/node"
+  ]
+}

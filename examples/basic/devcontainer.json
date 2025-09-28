@@ -1,0 +1,13 @@
+{
+  "name": "Copilot CLI Feature Example",
+  "image": "mcr.microsoft.com/devcontainers/base:bookworm",
+  "features": {
+    "ghcr.io/your-org/features/copilot-cli:0.1.0": {
+      "version": "latest",
+      "installCompletions": true,
+      "withGH": true,
+      "autoUpdate": false
+    }
+  },
+  "postCreateCommand": "copilot --version"
+}

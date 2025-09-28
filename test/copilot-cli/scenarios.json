@@ -1,0 +1,14 @@
+{
+  "debian": {
+    "image": "mcr.microsoft.com/devcontainers/base:bookworm",
+    "features": {
+      "copilot-cli": {}
+    }
+  },
+  "fedora": {
+    "image": "mcr.microsoft.com/devcontainers/base:fedora-41",
+    "features": {
+      "copilot-cli": {}
+    }
+  }
+}
