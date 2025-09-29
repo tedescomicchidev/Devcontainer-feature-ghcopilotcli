@@ -1,0 +1,33 @@
+name: Publish Dev Container Features
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Derive namespace
+        id: namespace
+        run: |
+          collection="${GITHUB_REPOSITORY}"
+          namespace="$(echo "${collection}" | tr '[:upper:]' '[:lower:]')"
+          echo "namespace=${namespace}" >> "$GITHUB_OUTPUT"
+
+      - name: Publish Feature Collection to GHCR
+        uses: devcontainers/action@v1
+        with:
+          publish-features: "true"
+          base-path-to-features: "./src"
+          oci-registry: "ghcr.io"
+          features-namespace: "${{ steps.namespace.outputs.namespace }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
