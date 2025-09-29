@@ -23,4 +23,7 @@ This repository packages a Dev Container Feature that installs and configures th
    devcontainer features publish src/copilot-cli --namespace your-org/features
    ```
 
-See `src/copilot-cli/README.md` for feature usage details and options.
+## Distribution
+
+- **GitHub Actions workflow** – `.github/workflows/publish.yml` publishes the feature collection to `ghcr.io` whenever you push a semantic tag (for example `v0.1.0`) or trigger the workflow manually.
+- **Local helper script** – `distribution/local-ubuntu-docker.sh` replicates the automated publish process on an Ubuntu host with Docker installed. It runs the Dev Containers CLI from a container so no additional tooling is required on the host.
